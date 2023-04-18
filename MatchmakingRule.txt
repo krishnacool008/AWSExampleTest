@@ -1,0 +1,28 @@
+{
+    "name": "Game Lift Tutorial Matchmaking Rule Example",
+    "ruleLanguageVersion": "1.0",
+    "playerAttributes": [],
+    "teams": [{
+        "name": "team",
+        "maxPlayers": 2,
+        "minPlayers": 1,
+		"quantity": 2
+    }],
+    "rules": [{
+        "name": "CloseTeamSizes",
+        "description": "Only launch a game when the team sizes are within 0 of each other.  e.g. 1 vs 1, 2 vs 2",
+        "type": "distance",
+        "measurements": [ "max(count(teams[*].players))"],
+        "referenceValue": "min(count(teams[*].players))",
+        "maxDistance": 0
+    }
+	],
+    "expansions": [
+	{
+        "target": "rules[CloseTeamSizes].maxDistance",
+        "steps": [{
+            "waitTimeSeconds": 5,
+            "value": 1
+        }]
+    }]
+}
